@@ -1,12 +1,18 @@
 
 const express = require('express');
+const cors = require('cors');
+const db = require('./db');
 
 const PORT = 8080;
 const HOST = 'localhost';
 
 const app = express();
 
-// GET http://localhost:8080/
+app.use(cors());
+
+db.sync(() => console.log(`Banco de dados conectado: ${process.env.DB_NAME}`))
+
+// GET http://172.17.0.2:49160/
 app.get('/', (req, res) => {
     res.send('Hello World');
 });
