@@ -4,7 +4,7 @@ const cors = require('cors');
 const db = require('./db');
 
 const PORT = 8080;
-const HOST = 'localhost';
+const HOST = '0.0.0.0';
 
 const app = express();
 
