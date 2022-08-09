@@ -1,0 +1,187 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "1.0.0",
+    "title": "APi de tarefas",
+    "description": "Documentação da API de tarefas"
+  },
+  "host": "localhost:8080",
+  "basePath": "/",
+  "tags": [
+    {
+      "name": "Task",
+      "description": "Endpoints"
+    }
+  ],
+  "schemes": [
+    "http"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/tarefas": {
+      "get": {
+        "description": "Lista todas as tarefas",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Task" 
+              }
+            }     
+          }
+        }
+      },
+      "post": {
+        "description": "Cria uma nova tarefa",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "descricao": {
+                  "example": "Desenvolver API de tarefas"
+                },
+                "prazo": {
+                  "example": "2020-01-01T06:06:00.001Z"
+                },
+                "completa": {
+                  "example": true
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "object",
+              "$ref": "#/definitions/Task" 
+            }     
+          },
+          "400": {
+            "description": "Dados inválidos!"
+          } 
+        }
+      }
+    },
+    "/tarefas/{id}": {
+      "get": {
+        "description": "Busca uma tarefa pelo id",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "object",
+              "$ref": "#/definitions/Task" 
+            }
+          },
+          "404":{
+            "description": "Tarefa não encontrada!"
+          } 
+        }
+      },
+      "put": {
+        "description": "Atualiza dados de uma tarefa",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "descricao": {
+                  "example": "Desenvolver API de tarefas"
+                },
+                "prazo": {
+                  "example": "2020-01-01T06:06:00.001Z"
+                },
+                "completa": {
+                  "example": true
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "object",
+              "$ref": "#/definitions/Task" 
+            }
+          },
+          "400": {
+            "description": "Tarefa não encontrada!"
+          }
+        }
+      },
+      "delete": {
+        "description": "Apaga uma tarefa",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "1"
+          },
+          "400": {
+            "description": "Tarefa não encontrada!"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Task": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "number",
+          "example": 1
+        },
+        "descricao": {
+          "type": "string",
+          "example": "Desenvolver API de tarefas"
+        },
+        "prazo": {
+          "type": "string",
+          "example": "2020-01-01T06:06:00.001Z"
+        },
+        "completa": {
+          "type": "boolean",
+          "example": true
+        }
+      }
+    }
+  }
+}
