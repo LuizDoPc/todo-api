@@ -6,9 +6,15 @@ const dbUser = process.env.DB_USER;
 const dbHost = process.env.DB_HOST;
 const dbPassword = process.env.DB_PASSWORD;
 
-const sequelize = new Sequelize(dbName, dbUser, dbPassword, {
-    dialect: "mysql",
-    host: dbHost,
-});
+let sequelize;
+try {
+    sequelize = new Sequelize(dbName, dbUser, dbPassword, {
+        dialect: "mysql",
+        host: dbHost,
+    });
+} catch (e) {
+    console.log('Error connecting to database: ', e);
+    process.exit(1);
+}
 
 module.exports = sequelize; 
